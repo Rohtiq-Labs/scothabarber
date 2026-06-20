@@ -11,6 +11,7 @@ export const siteImages = {
 
 export const siteVideos = {
   hero: `${ASSETS}/video-01.mp4`,
+  booking: `${ASSETS}/video-02.mp4`,
   cultureOne: `${ASSETS}/video-02.mp4`,
   cultureTwo: `${ASSETS}/video-03.mp4`,
 } as const;

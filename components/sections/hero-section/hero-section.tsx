@@ -21,21 +21,6 @@ export const HeroSection = (): React.ReactNode => {
         <div className="hero-stripe-2" aria-hidden="true" />
       </div>
 
-      <div className="hero-stats" aria-label="Statistics">
-        <div className="stat-item">
-          <span className="stat-num">{t.hero.stats.followers.num}</span>
-          <span className="stat-label">{t.hero.stats.followers.label}</span>
-        </div>
-        <div className="stat-item">
-          <span className="stat-num">{t.hero.stats.cuts.num}</span>
-          <span className="stat-label">{t.hero.stats.cuts.label}</span>
-        </div>
-        <div className="stat-item">
-          <span className="stat-num">{t.hero.stats.satisfaction.num}</span>
-          <span className="stat-label">{t.hero.stats.satisfaction.label}</span>
-        </div>
-      </div>
-
       <div className="hero-content">
         <div className="hero-headline">
           <div className="hero-tag">{t.hero.tag}</div>

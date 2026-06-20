@@ -9,18 +9,18 @@ export const TestimonialsSection = (): React.ReactNode => {
 
   return (
     <section id="testimonials" aria-labelledby="testimonials-heading">
-      <div className="section-eyebrow">{t.testimonials.eyebrow}</div>
+      <div className="section-eyebrow reveal reveal--fade">{t.testimonials.eyebrow}</div>
       <h2 id="testimonials-heading" className="section-title reveal">
         {t.testimonials.titleLine1}
         <br />
         <span className="outline">{t.testimonials.titleLine2}</span>
       </h2>
 
-      <div className="testimonials-grid reveal">
+      <div className="testimonials-grid reveal-stagger">
         {t.testimonials.items.map((review, index) => (
           <article
             key={review.name}
-            className={`review-card${"featured" in review && review.featured ? " featured" : ""}`}
+            className={`review-card reveal reveal--scale${"featured" in review && review.featured ? " featured" : ""}`}
           >
             <div className="review-stars" aria-label="5 out of 5 stars">
               ★★★★★

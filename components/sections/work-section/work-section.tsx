@@ -21,16 +21,16 @@ export const WorkSection = (): React.ReactNode => {
 
   return (
     <section id="work" aria-labelledby="work-heading">
-      <div className="section-eyebrow">{t.work.eyebrow}</div>
-      <div className="work-header reveal">
-        <div>
+      <div className="section-eyebrow reveal reveal--fade">{t.work.eyebrow}</div>
+      <div className="work-header reveal-stagger">
+        <div className="reveal reveal--left">
           <h2 id="work-heading" className="section-title">
             {t.work.titleLine1}
             <br />
             <span className="outline">{t.work.titleLine2}</span>
           </h2>
         </div>
-        <div className="work-filter" role="group" aria-label="Filter portfolio">
+        <div className="work-filter reveal reveal--right reveal--fade" role="group" aria-label="Filter portfolio">
           {filters.map((filter) => (
             <button
               key={filter.key}
@@ -44,7 +44,7 @@ export const WorkSection = (): React.ReactNode => {
         </div>
       </div>
 
-      <div className="work-grid reveal">
+      <div className="work-grid reveal-stagger">
         {t.work.cards.map((card, index) => {
           const asset = workGallery[index];
           const isVisible = activeFilter === "all" || asset.filter === activeFilter;
@@ -52,7 +52,7 @@ export const WorkSection = (): React.ReactNode => {
           return (
             <article
               key={card.title}
-              className={`work-card ${cardClasses[index]}${isVisible ? "" : " is-hidden"}`}
+              className={`work-card reveal reveal--scale ${cardClasses[index]}${isVisible ? "" : " is-hidden"}`}
               data-filter={asset.filter}
             >
               <div className="work-card-inner">

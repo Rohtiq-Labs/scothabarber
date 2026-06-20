@@ -8,8 +8,8 @@ export const FooterSection = (): React.ReactNode => {
 
   return (
     <footer className="sco-footer">
-      <div className="footer-top">
-        <div className="footer-brand">
+      <div className="footer-top reveal-stagger">
+        <div className="footer-brand reveal reveal--fade">
           <span className="footer-logo">
             {t.footer.logo}
             <span>.</span>
@@ -17,7 +17,7 @@ export const FooterSection = (): React.ReactNode => {
           <span className="footer-tagline">{t.footer.tagline}</span>
         </div>
         <div className="footer-links">
-          <div className="footer-col">
+          <div className="footer-col reveal reveal--fade">
             <h5>{t.footer.navigate}</h5>
             <ul>
               <li>
@@ -34,20 +34,9 @@ export const FooterSection = (): React.ReactNode => {
               </li>
             </ul>
           </div>
-          <div className="footer-col">
+          <div className="footer-col reveal reveal--fade">
             <h5>{t.footer.connect}</h5>
             <ul>
-              <li>
-                <a
-                  href={t.links.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="footer-connect-link"
-                >
-                  <InstagramIcon className="footer-connect-link__icon" />
-                  {t.footer.links.instagram}
-                </a>
-              </li>
               <li>
                 <a
                   href={t.links.scoBrazy}
@@ -74,7 +63,7 @@ export const FooterSection = (): React.ReactNode => {
           </div>
         </div>
       </div>
-      <div className="footer-bottom">
+      <div className="footer-bottom reveal reveal--fade">
         <span className="footer-copy">{t.footer.copy}</span>
         <div className="footer-social">
           <a

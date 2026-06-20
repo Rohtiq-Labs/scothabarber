@@ -24,11 +24,6 @@ export const ur = {
     descLine2: "ان لوگوں کے لیے جو مختلف چلتے ہیں۔",
     cta: "اپni سیٹ بُک کریں",
     scroll: "سکرول",
-    stats: {
-      followers: { num: "1.2K", label: "فالوورز" },
-      cuts: { num: "268", label: "پوسٹ شدہ کٹس" },
-      satisfaction: { num: "100%", label: "اطمینان" },
-    },
   },
   ticker: [
     "FADES",
@@ -183,11 +178,10 @@ export const ur = {
       artist: "The Artist",
       services: "Services",
       reviews: "Reviews",
-      instagram: "Instagram",
       scoBrazy: "@ScoBrazy",
       booksy: "Book via Booksy",
     },
-    copy: "© 2024 Scothabarber. All rights reserved. Dallas, TX.",
+    copy: "© 2026 Scothabarber. All rights reserved. Dallas, TX.",
     social: {
       instagramAria: "Instagram",
       booksyAria: "Booksy",

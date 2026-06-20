@@ -23,24 +23,24 @@ export const CultureSection = (): React.ReactNode => {
 
   return (
     <section id="culture" aria-labelledby="culture-heading">
-      <div className="culture-header">
-        <div className="section-eyebrow">{t.culture.eyebrow}</div>
-        <h2 id="culture-heading" className="culture-title">
+      <div className="culture-header reveal-stagger">
+        <div className="section-eyebrow reveal reveal--fade">{t.culture.eyebrow}</div>
+        <h2 id="culture-heading" className="culture-title reveal">
           <span className="city">{t.culture.titleCity}</span>
           <br />
           <span className="outline-text">{t.culture.titleOutline}</span>
         </h2>
-        <div className="culture-desc-col reveal">
+        <div className="culture-desc-col reveal reveal--fade">
           <p>{t.culture.desc}</p>
         </div>
       </div>
 
-      <div className="culture-mosaic reveal">
+      <div className="culture-mosaic reveal-stagger">
         {mosaicCellClasses.map((cellClass, index) => {
           if (cellClass.includes("txt")) {
             if (cellClass.includes("area-code")) {
               return (
-                <div key={`culture-${index}`} className={cellClass}>
+                <div key={`culture-${index}`} className={`${cellClass} reveal reveal--scale`}>
                   <div className="culture-cell-text">{t.culture.areaCode}</div>
                   <div className="culture-cell-sub">{t.culture.areaCodeLabel}</div>
                 </div>
@@ -48,7 +48,7 @@ export const CultureSection = (): React.ReactNode => {
             }
 
             return (
-              <div key={`culture-${index}`} className={cellClass}>
+              <div key={`culture-${index}`} className={`${cellClass} reveal reveal--scale`}>
                 <div className="culture-cell-text">{t.culture.eventsNum}</div>
                 <div className="culture-cell-sub">{t.culture.eventsLabel}</div>
               </div>
@@ -59,7 +59,7 @@ export const CultureSection = (): React.ReactNode => {
           mediaIndex += 1;
 
           return (
-            <div key={`culture-${index}`} className={cellClass}>
+            <div key={`culture-${index}`} className={`${cellClass} reveal reveal--scale`}>
               {media.type === "video" ? (
                 <MediaVideo src={media.src} className="culture-cell-media" ariaLabel={media.alt} />
               ) : (

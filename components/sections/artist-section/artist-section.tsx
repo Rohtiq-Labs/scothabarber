@@ -9,7 +9,7 @@ export const ArtistSection = (): React.ReactNode => {
 
   return (
     <section id="artist" aria-labelledby="artist-heading">
-      <div className="artist-portrait reveal">
+      <div className="artist-portrait reveal reveal--left reveal--slow">
         <div className="artist-portrait-frame">
           <MediaImage
             src={siteImages.artistAtWork}
@@ -22,15 +22,15 @@ export const ArtistSection = (): React.ReactNode => {
         <div className="artist-year-badge">{t.artist.year}</div>
       </div>
 
-      <div className="artist-content reveal">
-        <div className="section-eyebrow">{t.artist.eyebrow}</div>
-        <h2 id="artist-heading">
+      <div className="artist-content reveal-stagger">
+        <div className="section-eyebrow reveal reveal--fade">{t.artist.eyebrow}</div>
+        <h2 id="artist-heading" className="reveal">
           {t.artist.titleLine1}
           <br />
           {t.artist.titleLine2}
           <em>{t.artist.titleEm}</em>
         </h2>
-        <p className="artist-body">
+        <p className="artist-body reveal reveal--fade">
           Based out of <strong>{t.artist.bodyLocation}</strong>, Sco Brazy built a brand from the
           ground up — one precise cut at a time. Known for transformations that go beyond the
           chair, every client walks out looking like they belong on the front page.
@@ -40,7 +40,7 @@ export const ArtistSection = (): React.ReactNode => {
           <strong>{t.artist.bodyColor}</strong> and signature fades — this isn&apos;t a
           barbershop visit, it&apos;s an experience.
         </p>
-        <div className="artist-skills">
+        <div className="artist-skills reveal reveal--fade">
           {t.artist.skills.hot.map((skill) => (
             <span key={skill} className="skill-chip hot">
               {skill}
@@ -56,7 +56,7 @@ export const ArtistSection = (): React.ReactNode => {
           href={t.links.instagram}
           target="_blank"
           rel="noopener noreferrer"
-          className="artist-ig"
+          className="artist-ig reveal reveal--fade"
         >
           <span className="artist-ig-icon" aria-hidden="true">
             ✦

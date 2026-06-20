@@ -24,11 +24,6 @@ export const en = {
     descLine2: "Built for those who move different.",
     cta: "Book Your Seat",
     scroll: "Scroll",
-    stats: {
-      followers: { num: "1.2K", label: "Followers" },
-      cuts: { num: "268", label: "Cuts Posted" },
-      satisfaction: { num: "100%", label: "Satisfaction" },
-    },
   },
   ticker: [
     "FADES",
@@ -183,11 +178,10 @@ export const en = {
       artist: "The Artist",
       services: "Services",
       reviews: "Reviews",
-      instagram: "Instagram",
       scoBrazy: "@ScoBrazy",
       booksy: "Book via Booksy",
     },
-    copy: "© 2024 Scothabarber. All rights reserved. Dallas, TX.",
+    copy: "© 2026 Scothabarber. All rights reserved. Dallas, TX.",
     social: {
       instagramAria: "Instagram",
       booksyAria: "Booksy",

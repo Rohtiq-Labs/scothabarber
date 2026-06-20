@@ -16,10 +16,15 @@ export const InstagramIcon = ({ className = '' }: IconProps): React.ReactNode =>
 export const BooksyIcon = ({ className = '' }: IconProps): React.ReactNode => (
   <svg
     className={className}
-    viewBox="0 0 24 24"
+    viewBox="0 0 48 48"
     aria-hidden="true"
-    fill="currentColor"
+    fill="none"
+    stroke="currentColor"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth={3}
   >
-    <path d="M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 2v16h12V4H6zm2.5 3.25h1.35v9.5H8.5v-9.5zm3.4 0h1.35v9.5h-1.35v-9.5zm3.4 0H16.5v7.1h-1.35V7.25z" />
+    <path d="M24.158 14.829V27.5m0 0a5.671 5.671 0 1 1 5.67 5.67c-7.738 0-7.852-7.583-12.791-7.583c-4.25 0-4.537 3.273-4.537 3.273" />
+    <path d="M38.5 5.5h-29a4 4 0 0 0-4 4v29a4 4 0 0 0 4 4h29a4 4 0 0 0 4-4v-29a4 4 0 0 0-4-4" />
   </svg>
 );
