@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCOTHABARBER — Dallas Cut Different</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --black: #0F0F0F;
+    --white: #F5F5F5;
+    --red: #D72638;
+    --blue: #2563EB;
+    --gray: #1A1A1A;
+    --mid: #2A2A2A;
+    --dim: #888;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--red);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease;
+    mix-blend-mode: normal;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(215,38,56,0.5);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.35s ease;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 48px;
+    mix-blend-mode: difference;
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--red); }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; }
+  .nav-book {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--white);
+    padding: 10px 24px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-book:hover { background: var(--red); color: var(--white); }
+
+  /* HERO */
+  #hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: var(--black);
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(15,15,15,0.3) 0%, rgba(15,15,15,0.0) 40%, rgba(15,15,15,0.8) 80%, rgba(15,15,15,1) 100%),
+      linear-gradient(135deg, #0F0F0F 0%, #1a0a0e 50%, #0a0a1a 100%);
+    overflow: hidden;
+  }
+
+  /* Animated barber grid background */
+  .hero-grid {
+    position: absolute; inset: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 3px;
+    opacity: 0.25;
+    animation: gridPulse 8s ease-in-out infinite;
+  }
+  @keyframes gridPulse {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero-grid-cell {
+    background: var(--mid);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid-cell::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(45deg, transparent 40%, rgba(215,38,56,0.1) 100%);
+  }
+
+  /* Big textural background text */
+  .hero-bg-text {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(180px, 30vw, 420px);
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.04);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: -0.02em;
+    user-select: none;
+  }
+
+  /* Red stripe accent */
+  .hero-stripe {
+    position: absolute;
+    top: 0; right: 18%;
+    width: 3px;
+    height: 100%;
+    background: var(--red);
+    opacity: 0.7;
+  }
+  .hero-stripe-2 {
+    position: absolute;
+    top: 0; right: calc(18% + 8px);
+    width: 1px;
+    height: 100%;
+    background: var(--red);
+    opacity: 0.3;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 48px 80px;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .hero-headline {
+    flex: 1;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+  }
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 32px; height: 1px;
+    background: var(--red);
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 13vw, 200px);
+    line-height: 0.88;
+    letter-spacing: -0.01em;
+    color: var(--white);
+  }
+  h1 .line-red { color: var(--red); }
+  h1 .line-outline {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--white);
+  }
+
+  .hero-sub-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 24px;
+    max-width: 280px;
+  }
+  .hero-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(245,245,245,0.6);
+    text-align: right;
+    font-weight: 300;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 16px 32px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-cta::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 0; height: 100%;
+    background: var(--red);
+    transition: width 0.3s ease;
+    z-index: -1;
+  }
+  .hero-cta:hover::before { width: 100%; }
+  .hero-cta:hover { border-color: var(--red); }
+
+  .hero-cta-arrow { font-size: 16px; transition: transform 0.3s; }
+  .hero-cta:hover .hero-cta-arrow { transform: translateX(4px); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 32px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    opacity: 0.4;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+  .hero-scroll span {
+    font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--white), transparent);
+  }
+
+  .hero-stats {
+    position: absolute;
+    left: 48px; top: 50%;
+    transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 32px;
+    z-index: 2;
+  }
+  .stat-item { display: flex; flex-direction: column; gap: 4px; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    line-height: 1;
+    color: var(--white);
+  }
+  .stat-label {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  /* MARQUEE TICKER */
+  .ticker {
+    background: var(--red);
+    overflow: hidden;
+    padding: 14px 0;
+    position: relative;
+    z-index: 3;
+  }
+  .ticker-track {
+    display: flex;
+    gap: 0;
+    animation: ticker 20s linear infinite;
+    white-space: nowrap;
+  }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 32px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.15em;
+    color: var(--white);
+  }
+  .ticker-dot {
+    width: 6px; height: 6px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* TRANSFORMATION WALL */
+  #work {
+    padding: 120px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .section-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 24px;
+  }
+  .section-eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(215,38,56,0.3);
+  }
+
+  .work-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 64px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 8vw, 110px);
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+  }
+  .section-title .outline {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(245,245,245,0.3);
+  }
+  .work-filter {
+    display: flex; gap: 4px;
+  }
+  .filter-btn {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--dim);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    cursor: none;
+    transition: all 0.2s;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--red);
+    border-color: var(--red);
+    color: var(--white);
+  }
+
+  /* BENTO GRID GALLERY */
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto;
+    gap: 6px;
+  }
+
+  .work-card {
+    position: relative;
+    overflow: hidden;
+    background: var(--gray);
+    cursor: none;
+  }
+  .work-card::before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+  .work-card.tall::before { padding-top: 130%; }
+  .work-card.wide::before { padding-top: 56%; }
+
+  .work-card-inner {
+    position: absolute; inset: 0;
+    display: flex; align-items: flex-end;
+    background: var(--mid);
+  }
+
+  /* Fake photo backgrounds using CSS art to represent barber work */
+  .work-card:nth-child(1) .work-card-inner { background: linear-gradient(160deg, #1a0e12 0%, #2d1520 50%, #0f0f0f 100%); }
+  .work-card:nth-child(2) .work-card-inner { background: linear-gradient(200deg, #0e1420 0%, #1a2035 60%, #0f0f0f 100%); }
+  .work-card:nth-child(3) .work-card-inner { background: linear-gradient(140deg, #1a1a0e 0%, #2a2a18 50%, #0f0f0f 100%); }
+  .work-card:nth-child(4) .work-card-inner { background: linear-gradient(170deg, #1a0e0e 0%, #301515 60%, #0f0f0f 100%); }
+  .work-card:nth-child(5) .work-card-inner { background: linear-gradient(130deg, #0e1820 0%, #182535 60%, #0f0f0f 100%); }
+  .work-card:nth-child(6) .work-card-inner { background: linear-gradient(150deg, #180e1a 0%, #281530 60%, #0f0f0f 100%); }
+
+  /* SVG silhouettes for each card */
+  .work-card-inner svg {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-height: 85%;
+    opacity: 0.35;
+  }
+
+  .work-card-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 24px 20px 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+    transform: translateY(100%);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .work-card:hover .work-card-label {
+    transform: translateY(0);
+  }
+  .work-card-label h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.06em;
+  }
+  .work-card-label p {
+    font-size: 10px;
+    color: var(--dim);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* Corner tag */
+  .work-tag {
+    position: absolute;
+    top: 14px; right: 14px;
+    background: var(--red);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .work-card:hover .work-tag { opacity: 1; }
+
+  .c1 { grid-column: span 4; }
+  .c2 { grid-column: span 4; }
+  .c3 { grid-column: span 4; }
+  .c4 { grid-column: span 5; }
+  .c5 { grid-column: span 4; }
+  .c6 { grid-column: span 3; }
+
+  /* THE ARTIST */
+  #artist {
+    padding: 120px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    background: var(--gray);
+    position: relative;
+    overflow: hidden;
+  }
+  #artist::before {
+    content: 'SCO';
+    position: absolute;
+    right: -40px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 320px;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.03);
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .artist-portrait {
+    position: relative;
+  }
+  .artist-portrait-frame {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: var(--mid);
+    position: relative;
+    overflow: hidden;
+  }
+  .artist-portrait-frame::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom right, rgba(215,38,56,0.15), transparent 60%);
+  }
+
+  /* Portrait silhouette */
+  .artist-portrait-frame svg {
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    height: 95%;
+    opacity: 0.5;
+  }
+
+  .artist-accent-box {
+    position: absolute;
+    bottom: -16px; right: -16px;
+    width: 60%; height: 40%;
+    border: 1px solid var(--red);
+    z-index: -1;
+  }
+  .artist-year-badge {
+    position: absolute;
+    top: 20px; left: -20px;
+    background: var(--red);
+    padding: 16px 20px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    line-height: 1;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  .artist-content { position: relative; z-index: 1; }
+  .artist-content h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(64px, 6vw, 96px);
+    line-height: 0.9;
+    margin-bottom: 32px;
+  }
+  .artist-content h2 em {
+    display: block;
+    font-style: normal;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(245,245,245,0.4);
+  }
+  .artist-body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(245,245,245,0.65);
+    font-weight: 300;
+    margin-bottom: 40px;
+  }
+  .artist-body strong { color: var(--white); font-weight: 600; }
+
+  .artist-skills {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 48px;
+  }
+  .skill-chip {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--dim);
+    transition: all 0.2s;
+  }
+  .skill-chip:hover {
+    border-color: var(--red);
+    color: var(--red);
+  }
+  .skill-chip.hot {
+    background: rgba(215,38,56,0.1);
+    border-color: rgba(215,38,56,0.4);
+    color: var(--red);
+  }
+
+  .artist-ig {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+  .artist-ig:hover { opacity: 1; }
+  .artist-ig-icon {
+    width: 32px; height: 32px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+
+  /* DALLAS CULTURE */
+  #culture {
+    padding: 120px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .culture-header {
+    margin-bottom: 80px;
+  }
+  .culture-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 14vw, 200px);
+    line-height: 0.85;
+    position: relative;
+    z-index: 1;
+  }
+  .culture-title .city { color: var(--red); }
+  .culture-title .outline-text {
+    display: block;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(245,245,245,0.2);
+  }
+
+  .culture-desc-col {
+    max-width: 400px;
+    margin-left: auto;
+    margin-top: -60px;
+    position: relative;
+    z-index: 2;
+  }
+  .culture-desc-col p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(245,245,245,0.55);
+    font-weight: 300;
+  }
+
+  .culture-mosaic {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 260px 200px;
+    gap: 6px;
+    margin-top: 48px;
+  }
+  .culture-cell {
+    background: var(--mid);
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .culture-cell.big { grid-column: span 2; grid-row: span 2; }
+  .culture-cell.med { grid-column: span 2; }
+  .culture-cell.txt {
+    background: var(--red);
+    flex-direction: column;
+    gap: 4px;
+    padding: 24px;
+  }
+  .culture-cell.dark { background: var(--black); border: 1px solid rgba(255,255,255,0.06); }
+
+  .culture-cell.big { background: linear-gradient(160deg, #1c1020 0%, #120c18 100%); }
+  .culture-cell:nth-child(2) { background: linear-gradient(140deg, #0c1420 0%, #0a0e18 100%); }
+  .culture-cell:nth-child(4) { background: linear-gradient(160deg, #1a1008 0%, #120c04 100%); }
+  .culture-cell:nth-child(5) { background: linear-gradient(160deg, #14080a 0%, #0e0608 100%); }
+
+  .culture-cell-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    line-height: 1;
+    text-align: center;
+  }
+  .culture-cell-sub {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    text-align: center;
+  }
+
+  .culture-cell svg {
+    position: absolute;
+    width: 70%;
+    opacity: 0.2;
+  }
+
+  /* SERVICES */
+  #services {
+    padding: 120px 48px;
+    background: var(--gray);
+  }
+  .services-layout {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .services-sticky {
+    position: sticky;
+    top: 100px;
+  }
+  .services-sticky h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 5vw, 80px);
+    line-height: 0.9;
+    margin-bottom: 24px;
+  }
+  .services-sticky p {
+    font-size: 13px;
+    color: var(--dim);
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 40px;
+  }
+  .price-note {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(215,38,56,0.7);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .price-note::before { content: ''; width: 24px; height: 1px; background: var(--red); }
+
+  .service-list { display: flex; flex-direction: column; gap: 0; }
+
+  .service-item {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 28px 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 24px;
+    cursor: none;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-item:last-child { border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .service-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 2px; height: 100%;
+    background: var(--red);
+    transform: scaleY(0);
+    transition: transform 0.25s ease;
+  }
+  .service-item:hover::before { transform: scaleY(1); }
+  .service-item:hover { padding-left: 20px; }
+
+  .service-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .service-desc {
+    font-size: 12px;
+    color: var(--dim);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+  .service-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--white);
+    opacity: 0.7;
+    white-space: nowrap;
+  }
+  .service-price span { font-size: 14px; vertical-align: super; }
+
+  /* TESTIMONIALS */
+  #testimonials {
+    padding: 120px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  #testimonials::before {
+    content: '★★★★★';
+    position: absolute;
+    top: 60px; right: 48px;
+    font-size: 120px;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(215,38,56,0.15);
+    letter-spacing: 0.1em;
+    pointer-events: none;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-top: 64px;
+  }
+
+  .review-card {
+    background: var(--gray);
+    padding: 40px 36px;
+    position: relative;
+    transition: background 0.3s;
+  }
+  .review-card:hover { background: var(--mid); }
+  .review-card.featured {
+    background: var(--red);
+    grid-column: span 1;
+  }
+  .review-card.featured:hover { background: #bf2231; }
+
+  .review-quote {
+    font-size: 64px;
+    font-family: 'Bebas Neue', sans-serif;
+    line-height: 0.5;
+    color: rgba(255,255,255,0.2);
+    margin-bottom: 24px;
+  }
+  .review-text {
+    font-size: 14px;
+    line-height: 1.8;
+    font-weight: 300;
+    color: rgba(245,245,245,0.8);
+    margin-bottom: 32px;
+  }
+  .review-card.featured .review-text { color: var(--white); }
+  .review-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 20px;
+  }
+  .review-avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: var(--mid);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .review-card.featured .review-avatar { background: rgba(255,255,255,0.2); }
+  .review-name {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .review-handle {
+    font-size: 10px;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+    margin-top: 2px;
+  }
+  .review-card.featured .review-handle { color: rgba(255,255,255,0.6); }
+  .review-stars {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: gold;
+    margin-bottom: 20px;
+  }
+
+  /* BOOKING */
+  #booking {
+    padding: 140px 48px;
+    background: var(--black);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  #booking::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    border: 1px solid rgba(215,38,56,0.08);
+    pointer-events: none;
+  }
+  #booking::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px; height: 900px;
+    border-radius: 50%;
+    border: 1px solid rgba(215,38,56,0.04);
+    pointer-events: none;
+  }
+
+  .booking-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 24px;
+    display: block;
+  }
+  .booking-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(64px, 10vw, 150px);
+    line-height: 0.88;
+    margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+  .booking-title .dim-line {
+    display: block;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(245,245,245,0.2);
+  }
+  .booking-sub {
+    font-size: 14px;
+    color: var(--dim);
+    max-width: 400px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+    font-weight: 300;
+    position: relative; z-index: 1;
+  }
+  .booking-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--white);
+    padding: 20px 48px;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s;
+  }
+  .booking-btn:hover {
+    background: var(--red);
+    color: var(--white);
+  }
+  .booking-btn-arrow { font-size: 18px; }
+
+  .booking-details {
+    display: flex;
+    justify-content: center;
+    gap: 64px;
+    margin-top: 64px;
+    position: relative; z-index: 1;
+  }
+  .booking-detail { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+  .booking-detail-label {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+  .booking-detail-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--white);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--gray);
+    padding: 80px 48px 48px;
+  }
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 64px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .footer-brand {}
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .footer-logo span { color: var(--red); }
+  .footer-tagline {
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 80px;
+  }
+  .footer-col h5 {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-col ul a {
+    font-size: 13px;
+    color: rgba(245,245,245,0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-col ul a:hover { color: var(--white); }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-copy {
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+  }
+  .footer-social { display: flex; gap: 16px; }
+  .social-link {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    color: var(--dim);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .social-link:hover { border-color: var(--red); color: var(--red); }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    #hero { min-height: 100svh; }
+    .hero-stats { display: none; }
+    .hero-content { padding: 0 24px 64px; flex-direction: column; gap: 24px; align-items: flex-start; }
+    .hero-sub-block { align-items: flex-start; text-align: left; max-width: 100%; }
+    .hero-desc { text-align: left; }
+    h1 { font-size: clamp(64px, 20vw, 120px); }
+    #work, #artist, #culture, #services, #testimonials, #booking { padding: 80px 24px; }
+    .work-grid { grid-template-columns: repeat(2, 1fr); }
+    .c1, .c2, .c3, .c4, .c5, .c6 { grid-column: span 1; }
+    #artist { grid-template-columns: 1fr; }
+    .artist-portrait { order: -1; }
+    .culture-mosaic { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+    .culture-cell.big { grid-column: span 2; grid-row: span 1; aspect-ratio: 16/7; }
+    .services-layout { grid-template-columns: 1fr; }
+    .services-sticky { position: static; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .booking-details { flex-wrap: wrap; gap: 32px; }
+    .footer-top { flex-direction: column; gap: 48px; }
+    .footer-links { gap: 40px; }
+    .footer-bottom { flex-direction: column; gap: 24px; text-align: center; }
+    .work-header { flex-direction: column; align-items: flex-start; gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">SCO<span>.</span>BARBER</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#artist">Artist</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+  </ul>
+  <a href="https://fmejia0323.booksy.com" target="_blank" class="nav-book">Book Now</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-bg-text">FRESH</div>
+    <div class="hero-stripe"></div>
+    <div class="hero-stripe-2"></div>
+  </div>
+
+  <!-- Side stats -->
+  <div class="hero-stats">
+    <div class="stat-item">
+      <span class="stat-num">1.2K</span>
+      <span class="stat-label">Followers</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">268</span>
+      <span class="stat-label">Cuts Posted</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">100%</span>
+      <span class="stat-label">Satisfaction</span>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-headline">
+      <div class="hero-tag">Dallas, TX — Est. Sco Brazy</div>
+      <h1>
+        <span>DALLAS</span><br>
+        <span class="line-red">CUT</span><br>
+        <span class="line-outline">DIFFERENT.</span>
+      </h1>
+    </div>
+    <div class="hero-sub-block">
+      <p class="hero-desc">
+        Precision fades. Creative designs.<br>
+        Built for those who move different.
+      </p>
+      <a href="https://fmejia0323.booksy.com" target="_blank" class="hero-cta">
+        Book Your Seat
+        <span class="hero-cta-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track" id="ticker">
+    <!-- duplicated for seamless loop -->
+    <span class="ticker-item">FADES <span class="ticker-dot"></span></span>
+    <span class="ticker-item">CREATIVE DESIGNS <span class="ticker-dot"></span></span>
+    <span class="ticker-item">TAPERS <span class="ticker-dot"></span></span>
+    <span class="ticker-item">COLOR WORK <span class="ticker-dot"></span></span>
+    <span class="ticker-item">BRAIDS <span class="ticker-dot"></span></span>
+    <span class="ticker-item">DALLAS TX <span class="ticker-dot"></span></span>
+    <span class="ticker-item">TRANSFORMATIONS <span class="ticker-dot"></span></span>
+    <span class="ticker-item">SCOTHABARBER <span class="ticker-dot"></span></span>
+    <span class="ticker-item">FADES <span class="ticker-dot"></span></span>
+    <span class="ticker-item">CREATIVE DESIGNS <span class="ticker-dot"></span></span>
+    <span class="ticker-item">TAPERS <span class="ticker-dot"></span></span>
+    <span class="ticker-item">COLOR WORK <span class="ticker-dot"></span></span>
+    <span class="ticker-item">BRAIDS <span class="ticker-dot"></span></span>
+    <span class="ticker-item">DALLAS TX <span class="ticker-dot"></span></span>
+    <span class="ticker-item">TRANSFORMATIONS <span class="ticker-dot"></span></span>
+    <span class="ticker-item">SCOTHABARBER <span class="ticker-dot"></span></span>
+  </div>
+</div>
+
+<!-- TRANSFORMATION WALL -->
+<section id="work">
+  <div class="section-eyebrow">The Work</div>
+  <div class="work-header reveal">
+    <div>
+      <div class="section-title">
+        THE<br>
+        <span class="outline">ART.</span>
+      </div>
+    </div>
+    <div class="work-filter">
+      <button class="filter-btn active">All</button>
+      <button class="filter-btn">Fades</button>
+      <button class="filter-btn">Designs</button>
+      <button class="filter-btn">Color</button>
+    </div>
+  </div>
+
+  <div class="work-grid reveal">
+
+    <!-- Card 1 - Fade -->
+    <div class="work-card c1 tall">
+      <div class="work-card-inner">
+        <svg viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="100" cy="70" rx="40" ry="45" fill="#D72638" opacity="0.4"/>
+          <rect x="60" y="110" width="80" height="190" rx="8" fill="#D72638" opacity="0.3"/>
+          <path d="M70 110 Q100 95 130 110" stroke="#F5F5F5" stroke-width="1" fill="none" opacity="0.3"/>
+          <line x1="80" y1="90" x2="120" y2="90" stroke="#F5F5F5" stroke-width="0.5" opacity="0.5"/>
+        </svg>
+        <div class="work-tag">New</div>
+        <div class="work-card-label">
+          <h4>BALD FADE</h4>
+          <p>Classic precision</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 - Design -->
+    <div class="work-card c2">
+      <div class="work-card-inner">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="100" cy="60" rx="42" ry="48" fill="#2563EB" opacity="0.3"/>
+          <rect x="58" y="104" width="84" height="96" rx="6" fill="#2563EB" opacity="0.25"/>
+          <path d="M70 80 L90 65 L110 80 L130 65" stroke="#F5F5F5" stroke-width="1.5" fill="none" opacity="0.6"/>
+          <path d="M75 90 L125 90" stroke="#D72638" stroke-width="1" opacity="0.8"/>
+        </svg>
+        <div class="work-tag">🔥</div>
+        <div class="work-card-label">
+          <h4>HAIR DESIGN</h4>
+          <p>Custom artistry</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 - Color -->
+    <div class="work-card c3">
+      <div class="work-card-inner">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="100" cy="60" rx="42" ry="48" fill="#f4a614" opacity="0.3"/>
+          <rect x="58" y="104" width="84" height="96" rx="6" fill="#f4a614" opacity="0.2"/>
+          <circle cx="100" cy="55" r="25" fill="none" stroke="#f4a614" stroke-width="2" opacity="0.5"/>
+        </svg>
+        <div class="work-tag">Color</div>
+        <div class="work-card-label">
+          <h4>COLOR WORK</h4>
+          <p>Blonde & creative tints</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 - Taper -->
+    <div class="work-card c4 tall">
+      <div class="work-card-inner">
+        <svg viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="100" cy="75" rx="44" ry="52" fill="#D72638" opacity="0.35"/>
+          <rect x="55" y="120" width="90" height="180" rx="8" fill="#D72638" opacity="0.25"/>
+          <path d="M65 120 Q100 108 135 120" stroke="#F5F5F5" stroke-width="1" fill="none" opacity="0.4"/>
+          <path d="M72 88 Q100 70 128 88" stroke="#F5F5F5" stroke-width="0.5" fill="none" opacity="0.3"/>
+        </svg>
+        <div class="work-tag">Sig.</div>
+        <div class="work-card-label">
+          <h4>HIGH TAPER</h4>
+          <p>Signature style</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="work-card c5">
+      <div class="work-card-inner">
+        <svg viewBox="0 0 200 200" fill="none">
+          <ellipse cx="100" cy="58" rx="40" ry="46" fill="#8B5CF6" opacity="0.3"/>
+          <rect x="60" y="100" width="80" height="100" rx="6" fill="#8B5CF6" opacity="0.2"/>
+          <path d="M80 75 Q100 58 120 75 Q130 90 100 95 Q70 90 80 75Z" fill="none" stroke="#F5F5F5" stroke-width="0.8" opacity="0.4"/>
+        </svg>
+        <div class="work-tag">Kids</div>
+        <div class="work-card-label">
+          <h4>KIDS CUT</h4>
+          <p>For the young ones</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="work-card c6">
+      <div class="work-card-inner">
+        <svg viewBox="0 0 200 200" fill="none">
+          <ellipse cx="100" cy="60" rx="38" ry="44" fill="#10B981" opacity="0.25"/>
+          <rect x="62" y="100" width="76" height="100" rx="6" fill="#10B981" opacity="0.2"/>
+          <line x1="75" y1="100" x2="125" y2="100" stroke="#D72638" stroke-width="1.5" opacity="0.7"/>
+        </svg>
+        <div class="work-tag">Shape</div>
+        <div class="work-card-label">
+          <h4>SHAPE UP</h4>
+          <p>Crisp lines</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- THE ARTIST -->
+<section id="artist">
+  <div class="artist-portrait reveal">
+    <div class="artist-portrait-frame">
+      <!-- Barber silhouette SVG -->
+      <svg viewBox="0 0 300 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="150" cy="95" rx="52" ry="60" fill="#D72638" opacity="0.5"/>
+        <rect x="90" y="148" width="120" height="280" rx="12" fill="#D72638" opacity="0.35"/>
+        <rect x="70" y="160" width="40" height="180" rx="6" fill="#D72638" opacity="0.2"/>
+        <rect x="190" y="160" width="40" height="180" rx="6" fill="#D72638" opacity="0.2"/>
+        <rect x="98" y="428" width="42" height="72" rx="6" fill="#D72638" opacity="0.3"/>
+        <rect x="160" y="428" width="42" height="72" rx="6" fill="#D72638" opacity="0.3"/>
+        <!-- scissors detail -->
+        <path d="M186 155 L210 178 M186 178 L210 155" stroke="#F5F5F5" stroke-width="2" opacity="0.4"/>
+        <circle cx="188" cy="153" r="5" fill="none" stroke="#F5F5F5" stroke-width="1.5" opacity="0.4"/>
+        <circle cx="188" cy="180" r="5" fill="none" stroke="#F5F5F5" stroke-width="1.5" opacity="0.4"/>
+      </svg>
+    </div>
+    <div class="artist-accent-box"></div>
+    <div class="artist-year-badge">2024</div>
+  </div>
+
+  <div class="artist-content reveal">
+    <div class="section-eyebrow">The Artist</div>
+    <h2>
+      NOT JUST<br>
+      A BARBER.
+      <em>AN ARTIST.</em>
+    </h2>
+    <p class="artist-body">
+      Based out of <strong>Dallas, TX</strong>, Sco Brazy built a brand from the ground up — one precise cut at a time. Known for transformations that go beyond the chair, every client walks out looking like they belong on the front page.
+      <br><br>
+      From creative <strong>hair designs</strong> to bold <strong>color work</strong> and signature fades — this isn't a barbershop visit, it's an experience.
+    </p>
+    <div class="artist-skills">
+      <span class="skill-chip hot">Skin Fades</span>
+      <span class="skill-chip hot">Hair Designs</span>
+      <span class="skill-chip hot">Color Work</span>
+      <span class="skill-chip">Tapers</span>
+      <span class="skill-chip">Shape Ups</span>
+      <span class="skill-chip">Kids Cuts</span>
+      <span class="skill-chip">Braids</span>
+      <span class="skill-chip">Womens Cuts</span>
+    </div>
+    <a href="https://www.instagram.com/scothabarber/" target="_blank" class="artist-ig">
+      <span class="artist-ig-icon">✦</span>
+      @scothabarber
+    </a>
+  </div>
+</section>
+
+<!-- DALLAS CULTURE -->
+<section id="culture">
+  <div class="culture-header">
+    <div class="section-eyebrow">Identity</div>
+    <h2 class="culture-title">
+      <span class="city">DALLAS</span><br>
+      <span class="outline-text">BUILT.</span>
+    </h2>
+    <div class="culture-desc-col reveal">
+      <p>
+        This isn't just a barbershop. It's a cultural landmark in the making. A space where the community comes together, where artistry meets the streets, and where every cut tells a story of Dallas pride.
+      </p>
+    </div>
+  </div>
+
+  <div class="culture-mosaic reveal">
+    <div class="culture-cell big">
+      <svg viewBox="0 0 300 400" fill="none">
+        <rect x="80" y="50" width="140" height="300" rx="4" fill="#D72638" opacity="0.15" stroke="#D72638" stroke-width="0.5"/>
+        <text x="150" y="220" font-family="sans-serif" font-size="60" fill="#D72638" opacity="0.3" text-anchor="middle">DFW</text>
+        <circle cx="150" cy="200" r="80" fill="none" stroke="#D72638" stroke-width="0.5" opacity="0.4"/>
+      </svg>
+    </div>
+    <div class="culture-cell med">
+      <svg viewBox="0 0 200 150" fill="none">
+        <path d="M100 20 L180 140 L20 140 Z" fill="#2563EB" opacity="0.15" stroke="#2563EB" stroke-width="0.5"/>
+      </svg>
+    </div>
+    <div class="culture-cell txt">
+      <div class="culture-cell-text">6.5</div>
+      <div class="culture-cell-sub">Weekend Events</div>
+    </div>
+    <div class="culture-cell med dark">
+      <svg viewBox="0 0 200 150" fill="none">
+        <circle cx="100" cy="75" r="50" fill="none" stroke="#D72638" stroke-width="0.5" opacity="0.5"/>
+        <circle cx="100" cy="75" r="30" fill="none" stroke="#D72638" stroke-width="0.5" opacity="0.3"/>
+        <circle cx="100" cy="75" r="8" fill="#D72638" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="culture-cell dark">
+      <svg viewBox="0 0 100 100" fill="none">
+        <path d="M50 10 L90 90 L10 90 Z" fill="none" stroke="#F5F5F5" stroke-width="0.5" opacity="0.3"/>
+      </svg>
+    </div>
+    <div class="culture-cell txt" style="background:#1A1A1A; border: 1px solid rgba(215,38,56,0.3);">
+      <div class="culture-cell-text" style="color: var(--red);">214</div>
+      <div class="culture-cell-sub" style="color: var(--dim);">Dallas Area Code</div>
+    </div>
+    <div class="culture-cell med">
+      <svg viewBox="0 0 200 150" fill="none">
+        <line x1="0" y1="75" x2="200" y2="75" stroke="#D72638" stroke-width="0.5" opacity="0.5"/>
+        <line x1="100" y1="0" x2="100" y2="150" stroke="#D72638" stroke-width="0.5" opacity="0.5"/>
+        <circle cx="100" cy="75" r="40" fill="none" stroke="#2563EB" stroke-width="0.5" opacity="0.4"/>
+      </svg>
+    </div>
+    <div class="culture-cell dark">
+      <svg viewBox="0 0 100 100" fill="none">
+        <rect x="20" y="20" width="60" height="60" fill="none" stroke="#D72638" stroke-width="0.5" opacity="0.4" transform="rotate(45 50 50)"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-layout">
+    <div class="services-sticky reveal">
+      <div class="section-eyebrow">Services</div>
+      <h2>WHAT<br>YOU<br>GET.</h2>
+      <p>Every service is precision. Every cut is intentional. Appointments preferred — walk-ins welcome when available.</p>
+      <span class="price-note">Book via Booksy</span>
+    </div>
+
+    <div class="service-list reveal">
+      <div class="service-item">
+        <div>
+          <div class="service-name">SKIN FADE</div>
+          <div class="service-desc">Bald to skin, precision blended. The foundation of the drip.</div>
+        </div>
+        <div class="service-price"><span>$</span>35+</div>
+      </div>
+      <div class="service-item">
+        <div>
+          <div class="service-name">HIGH TAPER</div>
+          <div class="service-desc">Signature high bald taper — clean, sharp, and structured.</div>
+        </div>
+        <div class="service-price"><span>$</span>35+</div>
+      </div>
+      <div class="service-item">
+        <div>
+          <div class="service-name">HAIR DESIGN</div>
+          <div class="service-desc">Custom etched patterns, logos, and geometric artwork.</div>
+        </div>
+        <div class="service-price"><span>$</span>45+</div>
+      </div>
+      <div class="service-item">
+        <div>
+          <div class="service-name">COLOR WORK</div>
+          <div class="service-desc">Bleach, tints, and blonde treatments for the bold ones.</div>
+        </div>
+        <div class="service-price"><span>$</span>60+</div>
+      </div>
+      <div class="service-item">
+        <div>
+          <div class="service-name">KIDS CUT</div>
+          <div class="service-desc">Crisp fades and fresh cuts for the little ones. Age 12 and under.</div>
+        </div>
+        <div class="service-price"><span>$</span>25+</div>
+      </div>
+      <div class="service-item">
+        <div>
+          <div class="service-name">SHAPE UP</div>
+          <div class="service-desc">Lineup and edge detailing. Clean borders, sharp angles.</div>
+        </div>
+        <div class="service-price"><span>$</span>15+</div>
+      </div>
+      <div class="service-item">
+        <div>
+          <div class="service-name">WOMEN'S CUT</div>
+          <div class="service-desc">Fades, undercuts, and creative cuts — no gender barriers here.</div>
+        </div>
+        <div class="service-price"><span>$</span>40+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-eyebrow">Client Reactions</div>
+  <div class="section-title reveal">
+    THEY<br>
+    <span class="outline">TALK.</span>
+  </div>
+
+  <div class="testimonials-grid reveal">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-quote">"</div>
+      <p class="review-text">Bro transformed my whole look in one session. The design he put in was cleaner than anything I've seen on Instagram. People been asking me who does my hair ever since.</p>
+      <div class="review-author">
+        <div class="review-avatar">JD</div>
+        <div>
+          <div class="review-name">Jordan D.</div>
+          <div class="review-handle">Dallas, TX</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card featured">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-quote">"</div>
+      <p class="review-text">Sco is on another level. I flew from Houston just to get this cut. Worth every mile. He doesn't just cut hair — he reads your face and builds the look around you.</p>
+      <div class="review-author">
+        <div class="review-avatar">MK</div>
+        <div>
+          <div class="review-name">Marcus K.</div>
+          <div class="review-handle">Houston via Dallas</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-quote">"</div>
+      <p class="review-text">Took my son here for his first real cut. He walked out looking like a whole different kid — confidence was through the roof. Sco's got a gift for real.</p>
+      <div class="review-author">
+        <div class="review-avatar">TW</div>
+        <div>
+          <div class="review-name">Tanya W.</div>
+          <div class="review-handle">Grand Prairie, TX</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking">
+  <span class="booking-eyebrow">Ready to Level Up?</span>
+  <h2 class="booking-title reveal">
+    YOUR SEAT<br>
+    <span class="dim-line">IS WAITING.</span>
+  </h2>
+  <p class="booking-sub reveal">
+    Appointments book fast. Don't wait — secure your spot and show up ready to transform.
+  </p>
+  <a href="https://fmejia0323.booksy.com" target="_blank" class="booking-btn reveal">
+    Book Your Seat <span class="booking-btn-arrow">→</span>
+  </a>
+
+  <div class="booking-details reveal">
+    <div class="booking-detail">
+      <span class="booking-detail-label">Location</span>
+      <span class="booking-detail-val">Dallas, TX</span>
+    </div>
+    <div class="booking-detail">
+      <span class="booking-detail-label">Booking</span>
+      <span class="booking-detail-val">Booksy App</span>
+    </div>
+    <div class="booking-detail">
+      <span class="booking-detail-label">Instagram</span>
+      <span class="booking-detail-val">@scothabarber</span>
+    </div>
+    <div class="booking-detail">
+      <span class="booking-detail-label">Bay Area → </span>
+      <span class="booking-detail-val">Dallas Based</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="footer-logo">SCOTHA<span>.</span></span>
+      <span class="footer-tagline">Dallas Cut Different — @scothabarber</span>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h5>Navigate</h5>
+        <ul>
+          <li><a href="#work">The Work</a></li>
+          <li><a href="#artist">The Artist</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="https://www.instagram.com/scothabarber/" target="_blank">Instagram</a></li>
+          <li><a href="https://www.instagram.com/scobrazy/" target="_blank">@ScoBrazy</a></li>
+          <li><a href="https://fmejia0323.booksy.com" target="_blank">Book via Booksy</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2024 Scothabarber. All rights reserved. Dallas, TX.</span>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/scothabarber/" class="social-link" target="_blank">IG</a>
+      <a href="https://fmejia0323.booksy.com" class="social-link" target="_blank">BK</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.left = mouseX - 6 + 'px';
+    cursor.style.top = mouseY - 6 + 'px';
+  });
+
+  function animateRing() {
+    ringX += (mouseX - ringX - 18) * 0.12;
+    ringY += (mouseY - ringY - 18) * 0.12;
+    ring.style.left = ringX + 'px';
+    ring.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // Cursor grow on hover
+  document.querySelectorAll('a, button, .work-card, .service-item').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'scale(2.5)';
+      ring.style.transform = 'scale(1.5)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'scale(1)';
+      ring.style.transform = 'scale(1)';
+    });
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Filter buttons
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  // Parallax on hero bg text
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const bgText = document.querySelector('.hero-bg-text');
+    if (bgText) {
+      bgText.style.transform = `translate(-50%, calc(-50% + ${scrollY * 0.3}px))`;
+    }
+  });
+</script>
+
+</body>
+</html>
