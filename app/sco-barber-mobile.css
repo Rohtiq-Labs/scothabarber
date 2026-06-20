@@ -34,6 +34,101 @@
 
 /* Mobile nav + hero — max 1024px */
 @media (max-width: 1024px) {
+  html,
+  body {
+    overflow-x: clip;
+    max-width: 100%;
+    overscroll-behavior-x: none;
+  }
+
+  body {
+    touch-action: pan-y pinch-zoom;
+  }
+
+  main,
+  footer.sco-footer,
+  footer {
+    overflow-x: clip;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  #hero,
+  #work,
+  #artist,
+  #culture,
+  #services,
+  #testimonials,
+  #booking,
+  .ticker,
+  .sco-footer {
+    overflow-x: clip;
+    max-width: 100%;
+  }
+
+  .hero-bg,
+  .hero-bg-text {
+    max-width: 100%;
+  }
+
+  .artist-portrait {
+    overflow: hidden;
+  }
+
+  #artist::before {
+    right: -12px;
+    font-size: clamp(120px, 38vw, 220px);
+  }
+
+  #testimonials::before {
+    right: var(--section-x);
+    max-width: calc(100% - var(--section-x) * 2);
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .work-filter {
+    width: 100%;
+    overflow-x: visible;
+    flex-wrap: wrap;
+    padding-bottom: 0;
+  }
+
+  /* Vertical-only reveals — horizontal motion causes page shift on mobile */
+  .reveal,
+  .reveal--left,
+  .reveal--right,
+  .reveal--scale {
+    transform: translate3d(0, calc(var(--reveal-distance) * 0.85), 0);
+  }
+
+  .reveal--scale {
+    transform: translate3d(0, calc(var(--reveal-distance) * 0.85), 0) scale(0.98);
+  }
+
+  .reveal--fade {
+    transform: none;
+    filter: none;
+  }
+
+  .reveal.visible,
+  .reveal--left.visible,
+  .reveal--right.visible,
+  .reveal--scale.visible {
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+
+  .reveal--fade.visible {
+    transform: none;
+    filter: none;
+  }
+
+  .reveal-stagger {
+    overflow-x: clip;
+    max-width: 100%;
+  }
+
   :root {
     --section-x: clamp(20px, 4vw, 32px);
     --section-y: 80px;
@@ -254,18 +349,6 @@
     gap: 20px;
   }
 
-  .work-filter {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding-bottom: 4px;
-  }
-
-  .work-filter::-webkit-scrollbar {
-    display: none;
-  }
-
   .filter-btn {
     flex-shrink: 0;
     min-height: 44px;
@@ -295,14 +378,14 @@
   }
 
   .artist-year-badge {
-    left: 8px;
+    left: 0;
     font-size: 36px;
     padding: 12px 14px;
   }
 
   .artist-accent-box {
     right: 0;
-    bottom: -8px;
+    bottom: 0;
   }
 
   .artist-content h2 {
